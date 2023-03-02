@@ -54,4 +54,21 @@ public class WalletController {
     public Collection<WalletDto> getAllWallets(){
         return this.walletService.getAllWallets();
     }
+
+
+
+    @Autowired
+    private WalletJpaRepository walletJpaRepository;
+
+
+    @GetMapping("custom/wallets")
+    public List<WalletDto> findAllWallets(){
+        return this.walletJpaRepository.getAllWallets();
+    }
+
+
+    @GetMapping("custom/wallet/{name}")
+    public List<WalletDto> findAllWalletsHavingName(@PathVariable("name") String name) {
+        return this.walletJpaRepository.getAllWalletsHavingNameLike("%" + name + "%");
+    }
 }
